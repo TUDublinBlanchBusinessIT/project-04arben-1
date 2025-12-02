@@ -10,33 +10,20 @@ import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View, Animated } from "react-native";
-import { useRef, useEffect } from "react";
+import { View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-// Your AnimatedScanButton stays the same
-function AnimatedScanButton({ focused }) {
-  const scale = useRef(new Animated.Value(1)).current;
-
-  useEffect(() => {
-    Animated.spring(scale, {
-      toValue: focused ? 1.1 : 1,
-      useNativeDriver: true,
-      friction: 10,
-      tension: 40,
-    }).start();
-  }, [focused]);
-
+// Simple Scan Button: changes color when selected
+function ScanButton({ focused }) {
   return (
-    <Animated.View
+    <View
       style={{
-        transform: [{ scale }],
-        backgroundColor: focused ? "#d61c1c" : "#111",
-        width: 70,
-        height: 70,
-        borderRadius: 35,
+        width: 90,
+        height: 90,
+        borderRadius: 45,
+        backgroundColor: focused ? "#d61c1c" : "#000000ff",
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 35,
@@ -47,7 +34,7 @@ function AnimatedScanButton({ focused }) {
         size={32}
         color={focused ? "#fff" : "#d61c1c"}
       />
-    </Animated.View>
+    </View>
   );
 }
 
@@ -57,17 +44,25 @@ function MainApp() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarStyle: { backgroundColor: "#0a0a0a", borderTopWidth: 0, height: 70, position: "absolute", paddingBottom: 0 },
+        tabBarStyle: {
+          backgroundColor: "#0a0a0a",
+          borderTopWidth: 0,
+          height: 70,
+          position: "absolute",
+          paddingBottom: 0,
+        },
         tabBarActiveTintColor: "#d61c1c",
         tabBarInactiveTintColor: "#bdbdbd",
-        tabBarIcon: ({ color, size, focused }) => {
-          if (route.name === "Scan") return <AnimatedScanButton focused={focused} />;
+        tabBarIcon: ({ focused }) => {
+          if (route.name === "Scan") return <ScanButton focused={focused} />;
+          
           let iconName;
           if (route.name === "Home") iconName = "home-outline";
           else if (route.name === "Movies") iconName = "film-outline";
           else if (route.name === "Rewards") iconName = "gift-outline";
           else if (route.name === "Profile") iconName = "person-outline";
-          return <Ionicons name={iconName} size={22} color={color} />;
+
+          return <Ionicons name={iconName} size={22} color={focused ? "#d61c1c" : "#bdbdbd"} />;
         },
       })}
     >
