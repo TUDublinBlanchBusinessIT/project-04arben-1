@@ -1,4 +1,3 @@
-
 import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -23,12 +22,14 @@ export default function SignupScreen({ navigation }) {
       <Text style={styles.title}>Signup</Text>
       <TextInput
         placeholder="Email"
+        placeholderTextColor="#ccc"
         style={styles.input}
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
         placeholder="Password"
+        placeholderTextColor="#ccc"
         style={styles.input}
         secureTextEntry
         value={password}
@@ -44,7 +45,24 @@ export default function SignupScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", padding: 20 },
-  title: { fontSize: 24, marginBottom: 20, textAlign: "center" },
-  input: { borderWidth: 1, marginBottom: 12, padding: 10, borderRadius: 6 },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: "#000", 
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: "center",
+    color: "#fff", 
+  },
+  input: {
+    borderWidth: 1,
+    marginBottom: 12,
+    padding: 10,
+    borderRadius: 6,
+    borderColor: "#555",
+    color: "#fff", 
+  },
 });

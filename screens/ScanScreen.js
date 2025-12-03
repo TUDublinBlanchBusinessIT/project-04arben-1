@@ -1,9 +1,18 @@
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from "react-native";
 
 export default function ScanScreen() {
   return (
-    <View>
-      <Text>Scan Screenggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg</Text>
+    <View style={styles.container}>
+      <Text>Scan Screen</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#ecf0f1",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
