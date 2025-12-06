@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Image, FlatList, Dimensions } from "react-native";
+
+import movie1 from "../assets/avatar.webp";
+import movie2 from "../assets/terminator.jpg";
+
+const screenWidth = Dimensions.get("window").width;
+
+const movies = [movie1, movie2];
 
 export default function HomeScreen() {
   return (
@@ -12,14 +19,20 @@ export default function HomeScreen() {
       </View>
 
 
-      <View style={styles.imageContainer}>
-        <Image 
-          source={require("../assets/fnaf.jpg")} 
-          style={styles.image} 
-          resizeMode="contain"
+
+      <View style={styles.sliderContainer}>
+        <Text style={styles.sliderTitle}>Now Showing</Text>
+        <FlatList
+          data={movies}
+          keyExtractor={(_, index) => index.toString()}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          renderItem={({ item }) => (
+            <Image source={item} style={styles.movieImage} resizeMode="cover" />
+          )}
         />
       </View>
-
 
     </ScrollView>
   );
@@ -31,13 +44,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#121212",
   },
   topSpace: {
-    height: 60,       
-    backgroundColor: "#000", 
+    height: 60,
+    backgroundColor: "#000",
   },
   header: {
     marginTop: 20,
     marginBottom: 20,
-    paddingHorizontal: 20, 
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 28,
@@ -49,12 +62,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#ccc",
   },
-  imageContainer: {
-    alignItems: "center",
-    marginVertical: 20,
+  sliderContainer: {
+    marginTop: 80,
   },
-  image: {
-    width: 500,   
-    height: 250,  
+  sliderTitle: {
+    color: "#fff",
+    fontSize: 20,
+    marginBottom: 10,
+    marginLeft: 20,
+  },
+  movieImage: {
+    width: screenWidth * 0.8,
+    height: 200,
+    marginHorizontal: 10,
+    borderRadius: 10,
   },
 });
