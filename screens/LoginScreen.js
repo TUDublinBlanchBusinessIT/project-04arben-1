@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, Alert, StyleSheet, Image } from "react-native";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
@@ -10,7 +10,6 @@ export default function LoginScreen({ navigation }) {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-      
         navigation.replace("MainApp");
       })
       .catch((error) => {
@@ -20,7 +19,15 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+
+      <Image 
+        source={require("../assets/cinestar.png")}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+
       <Text style={styles.title}>Login</Text>
+
       <TextInput
         placeholder="Email"
         placeholderTextColor="#ccc"
@@ -28,6 +35,7 @@ export default function LoginScreen({ navigation }) {
         value={email}
         onChangeText={setEmail}
       />
+
       <TextInput
         placeholder="Password"
         placeholderTextColor="#ccc"
@@ -36,11 +44,14 @@ export default function LoginScreen({ navigation }) {
         value={password}
         onChangeText={setPassword}
       />
+
       <Button title="Login" onPress={handleLogin} />
+
       <Button
         title="Go to Signup"
         onPress={() => navigation.navigate("Signup")}
       />
+
     </View>
   );
 }
@@ -50,20 +61,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 20,
-    backgroundColor: "#000", 
+    backgroundColor: "#000",
+    alignItems: "center",
+  },
+  logo: {
+    width: 700,
+    height: 420,
+    marginBottom: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     marginBottom: 20,
     textAlign: "center",
-    color: "#fff", 
+    color: "#fff",
   },
   input: {
+    width: "100%",
     borderWidth: 1,
     marginBottom: 12,
     padding: 10,
     borderRadius: 6,
     borderColor: "#555",
-    color: "#fff", 
+    color: "#fff",
   },
 });
