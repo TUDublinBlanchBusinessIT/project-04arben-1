@@ -15,7 +15,7 @@ import { View } from "react-native";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-// Simple Scan Button: changes color when selected
+
 function ScanButton({ focused }) {
   return (
     <View
@@ -38,7 +38,7 @@ function ScanButton({ focused }) {
   );
 }
 
-// Tab Navigator (Main App)
+
 function MainApp() {
   return (
     <Tab.Navigator
@@ -75,15 +75,14 @@ function MainApp() {
   );
 }
 
-// App.js main
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* Login flow */}
+ 
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
-        {/* Main App */}
+    
         <Stack.Screen name="MainApp" component={MainApp} />
       </Stack.Navigator>
     </NavigationContainer>
